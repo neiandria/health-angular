@@ -1,20 +1,35 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  imports: [FormsModule]
 })
 export class LoginComponent {
   email = '';
   password = '';
 
+  constructor(private router: Router) {}
+
   onSubmit() {
-    // Aqui você pode chamar um serviço de autenticação real
-    console.log('Tentativa de login:', { email: this.email, password: this.password });
-    alert('logou');
+    const dummyAccounts = [
+      { role: 'Paciente', email: 'patientexample.com', password: 'password' },
+      { role: 'Médico', email: 'doctorexample.com', password: 'password' },
+      { role: 'Recepcionista', email: 'receptionistexample.com', password: 'password' },
+    ];
+
+    const user = dummyAccounts.find(
+      acc => acc.email === this.email && acc.password === this.password
+    );
+
+    if (user) {
+      console.log(`Login bem-sucedido como ${user.role}`);
+      this.router.navigate(['/consultas']);
+    } else {
+      alert('Credenciais inválidas. Verifique seu email e senha.');
+    }
   }
 }

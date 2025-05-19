@@ -1,11 +1,11 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MainHeaderComponent } from '../main-header/main-header.component';
+
 
 @Component({
   selector: 'app-sign-in',
-  imports: [FormsModule, NgIf, MainHeaderComponent],
+  imports: [FormsModule, NgIf],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })

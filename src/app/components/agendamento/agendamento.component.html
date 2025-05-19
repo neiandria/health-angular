@@ -1,0 +1,173 @@
+
+
+
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <div class="text-center mb-8">
+      <h1 class="text-2xl font-bold text-gray-800">Agendamento de Consulta</h1>
+      <p class="text-gray-600">Preencha os dados abaixo para agendar sua consulta médica</p>
+    </div>
+  
+    <!-- Etapas -->
+    <div class="flex mb-8">
+      <div
+        class="progress-step"
+        [class.active]="currentStep === 1"
+        [class.completed]="currentStep > 1"
+      >
+        <div class="step-number">1</div>
+        <div class="step-label">Especialidade</div>
+      </div>
+      <div
+        class="progress-step"
+        [class.active]="currentStep === 2"
+        [class.completed]="currentStep > 2"
+      >
+        <div class="step-number">2</div>
+        <div class="step-label">Médico</div>
+      </div>
+      <div
+        class="progress-step"
+        [class.active]="currentStep === 3"
+        [class.completed]="currentStep > 3"
+      >
+        <div class="step-number">3</div>
+        <div class="step-label">Data</div>
+      </div>
+      <div
+        class="progress-step"
+        [class.active]="currentStep === 4"
+        [class.completed]="currentStep > 4"
+      >
+        <div class="step-number">4</div>
+        <div class="step-label">Horário</div>
+      </div>
+      <div
+        class="progress-step"
+        [class.active]="currentStep === 5"
+        [class.completed]="currentStep > 5"
+      >
+        <div class="step-number">5</div>
+        <div class="step-label">Confirmação</div>
+      </div>
+    </div>
+  
+    <!-- Etapa 1 -->
+    <div *ngIf="currentStep === 1" class="bg-white rounded-xl shadow-md p-6 mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-6">Selecione a especialidade médica</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div
+          *ngFor="let specialty of specialties"
+          class="specialty-card border rounded-lg p-4 text-center cursor-pointer"
+          [class.selected]="formData.specialty === specialty"
+          (click)="selectSpecialty(specialty)"
+        >
+          {{ specialty }}
+        </div>
+      </div>
+      <div class="mt-6 text-right">
+        <button
+          class="bg-blue-600 text-white px-4 py-2 rounded"
+          (click)="nextStep()"
+          [disabled]="!formData.specialty"
+        >
+          Próximo
+        </button>
+      </div>
+    </div>
+  
+    <!-- Etapa 2 -->
+    <div *ngIf="currentStep === 2" class="bg-white rounded-xl shadow-md p-6 mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-6">Escolha o médico</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div
+          *ngFor="let doctor of getDoctorsForSpecialty()"
+          class="doctor-card border rounded-lg p-4 flex items-center gap-4 cursor-pointer"
+          [class.selected]="formData.doctor === doctor"
+          (click)="selectDoctor(doctor)"
+        >
+          <i class="fa-solid fa-user-doctor text-blue-600 text-2xl"></i>
+          {{ doctor }}
+        </div>
+      </div>
+      <div class="mt-6 flex justify-between">
+        <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded" (click)="prevStep()">Voltar</button>
+        <button
+          class="bg-blue-600 text-white px-4 py-2 rounded"
+          (click)="nextStep()"
+          [disabled]="!formData.doctor"
+        >
+          Próximo
+        </button>
+      </div>
+    </div>
+  
+    <!-- Etapa 3 -->
+    <div *ngIf="currentStep === 3" class="bg-white rounded-xl shadow-md p-6 mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-6">Selecione a data</h2>
+      <div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+        <div
+          *ngFor="let date of availableDates"
+          class="calendar-day border rounded p-2 text-center cursor-pointer"
+          [class.selected]="formData.date === date"
+          (click)="selectDate(date)"
+        >
+          {{ date }}
+        </div>
+      </div>
+      <div class="mt-6 flex justify-between">
+        <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded" (click)="prevStep()">Voltar</button>
+        <button
+          class="bg-blue-600 text-white px-4 py-2 rounded"
+          (click)="nextStep()"
+          [disabled]="!formData.date"
+        >
+          Próximo
+        </button>
+      </div>
+    </div>
+  
+    <!-- Etapa 4 -->
+    <div *ngIf="currentStep === 4" class="bg-white rounded-xl shadow-md p-6 mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-6">Escolha o horário</h2>
+      <div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+        <div
+          *ngFor="let slot of getTimeSlotsForDate()"
+          class="time-slot border rounded p-2 text-center cursor-pointer"
+          [class.selected]="formData.time === slot.time"
+          [class.unavailable]="!slot.available"
+          (click)="selectTime(slot)"
+        >
+          {{ slot.time }}
+        </div>
+      </div>
+      <div class="mt-6 flex justify-between">
+        <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded" (click)="prevStep()">Voltar</button>
+        <button
+          class="bg-blue-600 text-white px-4 py-2 rounded"
+          (click)="nextStep()"
+          [disabled]="!formData.time"
+        >
+          Próximo
+        </button>
+      </div>
+    </div>
+  
+    <!-- Etapa 5 -->
+    <div *ngIf="currentStep === 5" class="bg-white rounded-xl shadow-md p-6 mb-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-6">Confirmação</h2>
+      <div class="text-center">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+          <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+        <p class="text-green-600 font-semibold mt-4">Consulta agendada com sucesso!</p>
+        <p class="text-gray-600 mt-2">Você receberá um e-mail com os detalhes do seu agendamento.</p>
+      </div>
+      <div class="mt-6 text-center">
+        <button class="bg-blue-600 text-white px-4 py-2 rounded" (click)="resetForm()">
+          Agendar nova consulta
+        </button>
+      </div>
+    </div>
+  </div>
+  
