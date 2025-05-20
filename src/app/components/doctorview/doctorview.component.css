@@ -1,0 +1,56 @@
+  .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .status-pendente {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+        
+        .status-confirmado {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+        
+        .status-cancelado {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+        
+        .status-concluido {
+            background-color: #E0E7FF;
+            color: #3730A3;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            display: block;
+            color: #4B5563;
+            transition: all 0.2s;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #F3F4F6;
+            color: #111827;
+        }

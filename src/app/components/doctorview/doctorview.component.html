@@ -1,0 +1,377 @@
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white shadow-md">
+            <div class="p-4 border-b">
+                <h1 class="text-2xl font-bold text-healthPrimary">
+                    <i class="fas fa-heartbeat mr-2"></i> Health Easy
+                </h1>
+            </div>
+            <nav class="p-4">
+                <div class="mb-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-healthPrimary flex items-center justify-center text-white font-bold">
+                            DR
+                        </div>
+                        <div class="ml-3">
+                            <p class="font-medium">Dr. Carlos Silva</p>
+                            <p class="text-sm text-gray-500">Cardiologista</p>
+                        </div>
+                    </div>
+                </div>
+                <ul>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-2 rounded-lg bg-blue-50 text-healthPrimary">
+                            <i class="fas fa-calendar-check mr-3"></i>
+                            <span>Consultas</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-2 rounded-lg text-gray-600 hover:bg-gray-100">
+                            <i class="fas fa-user-injured mr-3"></i>
+                            <span>Pacientes</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-2 rounded-lg text-gray-600 hover:bg-gray-100">
+                            <i class="fas fa-prescription mr-3"></i>
+                            <span>Prescrições</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-2 rounded-lg text-gray-600 hover:bg-gray-100">
+                            <i class="fas fa-chart-line mr-3"></i>
+                            <span>Relatórios</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="flex items-center p-2 rounded-lg text-gray-600 hover:bg-gray-100">
+                            <i class="fas fa-cog mr-3"></i>
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Header -->
+            <header class="bg-white shadow-sm p-4 flex justify-between items-center">
+                <h2 class="text-xl font-semibold text-gray-800">
+                    <i class="fas fa-calendar-check mr-2 text-healthPrimary"></i> Consultas
+                </h2>
+                <div class="flex items-center">
+                    <div class="relative mr-4">
+                        <input type="text" placeholder="Buscar consulta..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-healthPrimary focus:border-transparent">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                    <button class="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Dashboard Content -->
+            <main class="p-6">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-healthPrimary">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Consultas Hoje</p>
+                                <p class="text-3xl font-bold mt-2">8</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
+                                <i class="fas fa-calendar-day text-healthPrimary text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-healthSecondary">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Consultas Amanhã</p>
+                                <p class="text-3xl font-bold mt-2">5</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center">
+                                <i class="fas fa-calendar-alt text-healthSecondary text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-purple-500">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Esta Semana</p>
+                                <p class="text-3xl font-bold mt-2">24</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center">
+                                <i class="fas fa-calendar-week text-purple-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-pink-500">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Total de Pacientes</p>
+                                <p class="text-3xl font-bold mt-2">142</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center">
+                                <i class="fas fa-user-friends text-pink-500 text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Next Appointment -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Próxima Consulta</h3>
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="p-6 flex items-center justify-between bg-gradient-to-r from-blue-50 to-blue-100">
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-800">Ana Carolina Oliveira</h4>
+                                <p class="text-gray-600 mt-1">
+                                    <i class="fas fa-clock mr-2 text-healthPrimary"></i> Hoje, 14:30 - 15:00
+                                </p>
+                                <p class="text-gray-600 mt-1">
+                                    <i class="fas fa-stethoscope mr-2 text-healthPrimary"></i> Retorno - Hipertensão
+                                </p>
+                            </div>
+                            <div class="flex space-x-3">
+                                <button class="px-4 py-2 bg-healthPrimary text-white rounded-lg hover:bg-blue-700 transition flex items-center">
+                                    <i class="fas fa-check mr-2"></i> Confirmar
+                                </button>
+                                <button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition flex items-center">
+                                    <i class="fas fa-phone-alt mr-2"></i> Ligar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Today's Appointments -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Consultas de Hoje</h3>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition text-sm">
+                                <i class="fas fa-filter mr-1"></i> Filtrar
+                            </button>
+                            <button class="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition text-sm">
+                                <i class="fas fa-sort mr-1"></i> Ordenar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Paciente</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horário</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Motivo</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-800 font-bold">
+                                                    JO
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">João Oliveira</div>
+                                                    <div class="text-sm text-gray-500">32 anos</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">09:00 - 09:30</div>
+                                            <div class="text-sm text-gray-500">Concluído</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Check-up anual</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs rounded-full status-concluido">
+                                                <i class="fas fa-check-circle mr-1"></i> Concluído
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <div class="dropdown relative">
+                                                <button class="text-gray-500 hover:text-gray-700">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-content">
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-file-prescription mr-2"></i> Prescrição</a>
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-print mr-2"></i> Imprimir</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-800 font-bold">
+                                                    MA
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Maria Almeida</div>
+                                                    <div class="text-sm text-gray-500">45 anos</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">10:15 - 10:45</div>
+                                            <div class="text-sm text-gray-500">Concluído</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Dor no peito</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs rounded-full status-concluido">
+                                                <i class="fas fa-check-circle mr-1"></i> Concluído
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <div class="dropdown relative">
+                                                <button class="text-gray-500 hover:text-gray-700">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-content">
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-file-prescription mr-2"></i> Prescrição</a>
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-print mr-2"></i> Imprimir</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr class="hover:bg-gray-50 bg-blue-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-800 font-bold">
+                                                    AC
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Ana Carolina Oliveira</div>
+                                                    <div class="text-sm text-gray-500">28 anos</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">14:30 - 15:00</div>
+                                            <div class="text-sm text-gray-500">Próximo</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Retorno - Hipertensão</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs rounded-full status-confirmado">
+                                                <i class="fas fa-calendar-check mr-1"></i> Confirmado
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <div class="dropdown relative">
+                                                <button class="text-gray-500 hover:text-gray-700">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-content">
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-calendar-times mr-2"></i> Cancelar</a>
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2"></i> Reagendar</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-800 font-bold">
+                                                    PS
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Pedro Santos</div>
+                                                    <div class="text-sm text-gray-500">50 anos</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">15:30 - 16:00</div>
+                                            <div class="text-sm text-gray-500">Futuro</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Avaliação de exames</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs rounded-full status-pendente">
+                                                <i class="fas fa-clock mr-1"></i> Pendente
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <div class="dropdown relative">
+                                                <button class="text-gray-500 hover:text-gray-700">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-content">
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-calendar-times mr-2"></i> Cancelar</a>
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2"></i> Reagendar</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-800 font-bold">
+                                                    LC
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Luiza Costa</div>
+                                                    <div class="text-sm text-gray-500">38 anos</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">16:45 - 17:15</div>
+                                            <div class="text-sm text-gray-500">Futuro</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Consulta de rotina</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs rounded-full status-confirmado">
+                                                <i class="fas fa-calendar-check mr-1"></i> Confirmado
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <div class="dropdown relative">
+                                                <button class="text-gray-500 hover:text-gray-700">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </button>
+                                                <div class="dropdown-content">
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-calendar-times mr-2"></i> Cancelar</a>
+                                                    <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2"></i> Reagendar</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>

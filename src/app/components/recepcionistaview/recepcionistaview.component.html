@@ -1,0 +1,558 @@
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-10">
+        <div class="flex items-center">
+            <h1 class="text-2xl font-bold text-healthPrimary">
+                <i class="fas fa-heartbeat mr-2"></i> Health Easy
+            </h1>
+            <span class="ml-4 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Recepção</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <input type="text" placeholder="Buscar paciente..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-healthPrimary focus:border-transparent">
+                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+            </div>
+            <button class="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 relative">
+                <i class="fas fa-bell"></i>
+                <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+            </button>
+            <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-healthPrimary flex items-center justify-center text-white font-bold">
+                    R
+                </div>
+                <span class="ml-2 font-medium">Recepção</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="p-6">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-healthPrimary">
+                <div class="flex justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Consultas Hoje</p>
+                        <p class="text-3xl font-bold mt-2">12</p>
+                        <p class="text-xs text-gray-500 mt-1">+2 em relação a ontem</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
+                        <i class="fas fa-calendar-day text-healthPrimary text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-healthSecondary">
+                <div class="flex justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Pacientes Cadastrados</p>
+                        <p class="text-3xl font-bold mt-2">328</p>
+                        <p class="text-xs text-gray-500 mt-1">+15 este mês</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center">
+                        <i class="fas fa-user-injured text-healthSecondary text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-purple-500">
+                <div class="flex justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Médicos Disponíveis</p>
+                        <p class="text-3xl font-bold mt-2">8</p>
+                        <p class="text-xs text-gray-500 mt-1">2 em consulta</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center">
+                        <i class="fas fa-user-md text-purple-500 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-healthWarning">
+                <div class="flex justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Agendamentos Pendentes</p>
+                        <p class="text-3xl font-bold mt-2">5</p>
+                        <p class="text-xs text-gray-500 mt-1">3 novos hoje</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-yellow-50 flex items-center justify-center">
+                        <i class="fas fa-clock text-healthWarning text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Ações Rápidas</h3>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <button class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-healthPrimary transition flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-healthPrimary mb-2">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <span class="text-sm font-medium">Novo Paciente</span>
+                </button>
+                <button class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-healthPrimary transition flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-healthSecondary mb-2">
+                        <i class="fas fa-calendar-plus"></i>
+                    </div>
+                    <span class="text-sm font-medium">Nova Consulta</span>
+                </button>
+                <button class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-healthPrimary transition flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-500 mb-2">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <span class="text-sm font-medium">Relatórios</span>
+                </button>
+                <button class="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:border-healthPrimary transition flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-healthWarning mb-2">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <span class="text-sm font-medium">Lembretes</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Appointments Table -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-800">Agendamentos</h3>
+                <div class="flex space-x-1">
+                    <button id="tab-hoje" class="px-4 py-2 text-gray-600 hover:text-healthPrimary transition tab-active">
+                        Hoje
+                    </button>
+                    <button id="tab-amanha" class="px-4 py-2 text-gray-600 hover:text-healthPrimary transition">
+                        Amanhã
+                    </button>
+                    <button id="tab-semana" class="px-4 py-2 text-gray-600 hover:text-healthPrimary transition">
+                        Esta Semana
+                    </button>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Paciente</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Médico</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Especialidade</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horário</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="appointments-content">
+                        <!-- Today's appointments (default) -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-800 font-bold">
+                                        JO
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">João Oliveira</div>
+                                        <div class="text-sm text-gray-500">32 anos</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Dr. Carlos Silva</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Cardiologia</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">09:00 - 09:30</div>
+                                <div class="text-sm text-gray-500">Sala 3</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs rounded-full status-concluido">
+                                    <i class="fas fa-check-circle mr-1"></i> Concluído
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="dropdown relative inline-block">
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                        <a href="#" class="dropdown-item"><i class="fas fa-file-invoice mr-2"></i> Gerar recibo</a>
+                                        <a href="#" class="dropdown-item"><i class="fas fa-print mr-2"></i> Imprimir</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-800 font-bold">
+                                        MA
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Maria Almeida</div>
+                                        <div class="text-sm text-gray-500">45 anos</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Dra. Ana Paula</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Clínico Geral</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">10:15 - 10:45</div>
+                                <div class="text-sm text-gray-500">Sala 1</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs rounded-full status-concluido">
+                                    <i class="fas fa-check-circle mr-1"></i> Concluído
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="dropdown relative inline-block">
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                        <a href="#" class="dropdown-item"><i class="fas fa-file-invoice mr-2"></i> Gerar recibo</a>
+                                        <a href="#" class="dropdown-item"><i class="fas fa-print mr-2"></i> Imprimir</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="hover:bg-gray-50 bg-blue-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-800 font-bold">
+                                        AC
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Ana Carolina Oliveira</div>
+                                        <div class="text-sm text-gray-500">28 anos</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Dr. Carlos Silva</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Cardiologia</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">14:30 - 15:00</div>
+                                <div class="text-sm text-gray-500">Sala 3</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs rounded-full status-confirmado">
+                                    <i class="fas fa-calendar-check mr-1"></i> Confirmado
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="dropdown relative inline-block">
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                        <a href="#" class="dropdown-item"><i class="fas fa-calendar-times mr-2"></i> Cancelar</a>
+                                        <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2"></i> Reagendar</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-800 font-bold">
+                                        PS
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Pedro Santos</div>
+                                        <div class="text-sm text-gray-500">50 anos</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Dr. Roberto Alves</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Ortopedia</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">15:30 - 16:00</div>
+                                <div class="text-sm text-gray-500">Sala 2</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs rounded-full status-pendente">
+                                    <i class="fas fa-clock mr-1"></i> Pendente
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="dropdown relative inline-block">
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                        <a href="#" class="dropdown-item"><i class="fas fa-calendar-times mr-2"></i> Cancelar</a>
+                                        <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2"></i> Reagendar</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-800 font-bold">
+                                        LC
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Luiza Costa</div>
+                                        <div class="text-sm text-gray-500">38 anos</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Dra. Fernanda Lima</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Pediatria</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">16:45 - 17:15</div>
+                                <div class="text-sm text-gray-500">Sala 1</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 py-1 text-xs rounded-full status-confirmado">
+                                    <i class="fas fa-calendar-check mr-1"></i> Confirmado
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="dropdown relative inline-block">
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                        <a href="#" class="dropdown-item"><i class="fas fa-calendar-times mr-2"></i> Cancelar</a>
+                                        <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2"></i> Reagendar</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="px-6 py-4 border-t flex items-center justify-between">
+                <div class="text-sm text-gray-500">
+                    Mostrando <span class="font-medium">1</span> a <span class="font-medium">5</span> de <span class="font-medium">12</span> consultas
+                </div>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="px-3 py-1 bg-healthPrimary text-white rounded-lg">1</button>
+                    <button class="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">2</button>
+                    <button class="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">3</button>
+                    <button class="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Simple script to handle dropdown menus
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const button = dropdown.querySelector('button');
+                const content = dropdown.querySelector('.dropdown-content');
+                
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isOpen = content.style.display === 'block';
+                    
+                    // Close all other dropdowns
+                    document.querySelectorAll('.dropdown-content').forEach(d => {
+                        if (d !== content) d.style.display = 'none';
+                    });
+                    
+                    // Toggle current dropdown
+                    content.style.display = isOpen ? 'none' : 'block';
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.dropdown-content').forEach(d => {
+                    d.style.display = 'none';
+                });
+            });
+            
+            // Tab switching functionality
+            const tabs = ['hoje', 'amanha', 'semana'];
+            const tabButtons = tabs.map(tab => document.getElementById(`tab-${tab}`));
+            
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    // Update active tab styling
+                    tabButtons.forEach(btn => btn.classList.remove('tab-active'));
+                    button.classList.add('tab-active');
+                    
+                    // In a real app, you would fetch different data for each tab
+                    // Here we're just simulating it by changing the content
+                    const content = document.getElementById('appointments-content');
+                    
+                    // This is just a simulation - in a real app you would fetch actual data
+                    if (tabs[index] === 'hoje') {
+                        content.innerHTML = `
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-800 font-bold">
+                                            JO
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">João Oliveira</div>
+                                            <div class="text-sm text-gray-500">32 anos</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Dr. Carlos Silva</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Cardiologia</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">09:00 - 09:30</div>
+                                    <div class="text-sm text-gray-500">Sala 3</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs rounded-full status-concluido">
+                                        <i class="fas fa-check-circle mr-1"></i> Concluído
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <div class="dropdown relative inline-block">
+                                        <button class="text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                            <a href="#" class="dropdown-item"><i class="fas fa-file-invoice mr-2"></i> Gerar recibo</a>
+                                            <a href="#" class="dropdown-item"><i class="fas fa-print mr-2"></i> Imprimir</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- More today's appointments would go here -->
+                        `;
+                    } else if (tabs[index] === 'amanha') {
+                        content.innerHTML = `
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-800 font-bold">
+                                            RM
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Ricardo Mendes</div>
+                                            <div class="text-sm text-gray-500">40 anos</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Dr. Carlos Silva</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Cardiologia</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">08:30 - 09:00</div>
+                                    <div class="text-sm text-gray-500">Sala 3</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs rounded-full status-confirmado">
+                                        <i class="fas fa-calendar-check mr-1"></i> Confirmado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <div class="dropdown relative inline-block">
+                                        <button class="text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                            <a href="#" class="dropdown-item"><i class="fas fa-calendar-times mr-2"></i> Cancelar</a>
+                                            <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2"></i> Reagendar</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- More tomorrow's appointments would go here -->
+                        `;
+                    } else if (tabs[index] === 'semana') {
+                        content.innerHTML = `
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-800 font-bold">
+                                            AS
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">Amanda Souza</div>
+                                            <div class="text-sm text-gray-500">29 anos</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Dra. Ana Paula</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Clínico Geral</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">Quarta, 10:00 - 10:30</div>
+                                    <div class="text-sm text-gray-500">Sala 1</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs rounded-full status-confirmado">
+                                        <i class="fas fa-calendar-check mr-1"></i> Confirmado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <div class="dropdown relative inline-block">
+                                        <button class="text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a href="#" class="dropdown-item"><i class="fas fa-eye mr-2"></i> Ver detalhes</a>
+                                            <a href="#" class="dropdown-item"><i class="fas fa-calendar-times mr-2"></i> Cancelar</a>
+                                            <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2"></i> Reagendar</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- More week's appointments would go here -->
+                        `;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
