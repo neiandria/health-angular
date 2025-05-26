@@ -1,236 +1,167 @@
 <div class="container mx-auto px-4 py-8">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-8">
-        <div>
-            <h1 class="text-2xl font-bold text-gray-800">Olá, João Silva!</h1>
-            <p class="text-gray-600">Bem-vindo de volta ao seu painel de consultas</p>
-        </div>
-        <div class="flex items-center space-x-4">
-            <div class="bg-blue-50 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
-                <i class="fas fa-user-circle mr-2"></i>Conta Paciente
-            </div>
-            <button class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300">
-                <i class="fas fa-bell text-gray-600"></i>
-            </button>
-        </div>
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-8">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800">
+        Olá, {{ currentUser?.fullName }}!
+      </h1>
+      <p class="text-gray-600">Bem-vindo de volta ao seu painel de consultas</p>
     </div>
-    
-    <!-- Action Buttons -->
-    <div class="flex justify-between items-center mb-8">
-        <h2 class="text-xl font-semibold text-gray-800">Minhas Consultas</h2>
-        <button [routerLink]="['/agendamento']" routerLinkActive="router-link-active"  class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
-            <i class="fas fa-plus mr-2"></i> Nova Consulta
+    <div class="flex items-center space-x-4">
+    </div>
+  </div>
+
+
+<!-- Card de Lembretes -->
+<div class="bg-white rounded-xl shadow-md p-6 mb-8">
+  <h3 class="text-lg font-semibold mb-4">Lembretes</h3>
+  <ng-container *ngIf="nextAppointment; else noReminders">
+    <p>Consulta em {{ daysUntilNext }} {{ daysUntilNext === 1 ? 'dia' : 'dias' }}</p>
+    <p>{{ nextAppointment.doctorName }} no dia {{ nextAppointment.date | date:'shortDate':'pt-BR' }} às {{ nextAppointment.time }}</p>
+    <p *ngIf="doctorConfirmed" class="mt-2 text-green-600">Médico confirmou sua consulta</p>
+  </ng-container>
+  <ng-template #noReminders>
+    <p class="text-gray-500">Sem lembretes</p>
+  </ng-template>
+</div>
+
+  <!-- Action Buttons -->
+  <div class="flex justify-between items-center mb-8">
+    <h2 class="text-xl font-semibold text-gray-800">Minhas Consultas</h2>
+    <button
+      [routerLink]="['/agendamento']"
+      class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg"
+    >
+      <i class="fas fa-plus mr-2"></i> Nova Consulta
+    </button>
+  </div>
+
+  <!-- Next Appointment Card -->
+  <div *ngIf="nextAppointment" class="bg-white rounded-xl shadow-md mb-8">
+    <div class="bg-blue-500 text-white px-6 py-3">
+      <h3 class="font-semibold flex items-center">
+        <i class="fas fa-calendar-check mr-2"></i> Próxima Consulta
+      </h3>
+    </div>
+    <div class="p-6 flex">
+      <div class="flex-shrink-0 bg-blue-100 rounded-full p-3">
+        <i class="fas fa-user-md text-blue-500 text-xl"></i>
+      </div>
+      <div class="ml-4 flex-1">
+        <div class="flex items-center">
+          <h4 class="text-lg font-semibold text-gray-800">
+            {{ nextAppointment.doctorName }}
+          </h4>
+          <span class="status-badge status-agendada ml-3">
+            <i class="fas fa-clock mr-1"></i>
+            {{ nextAppointment.status | titlecase }}
+          </span>
+        </div>
+        <p class="text-gray-600 mb-2">{{ nextAppointment.specialty }}</p>
+        <div class="flex items-center text-gray-500 mb-1">
+          <i class="far fa-calendar-alt mr-2"></i>
+          <span>{{ nextAppointment.date | date : "longDate" : "pt-BR" }}</span>
+        </div>
+        <div class="flex items-center text-gray-500">
+          <i class="far fa-clock mr-2"></i>
+          <span>{{ nextAppointment.time }}</span>
+        </div>
+      </div>
+      <div class="flex flex-col justify-end space-y-2">
+        <button
+          class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-50"
+        >
+          <i class="fas fa-times mr-2"></i> Cancelar
         </button>
+        <button
+          class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        >
+          <i class="fas fa-calendar-alt mr-2"></i> Remarcar
+        </button>
+      </div>
     </div>
-    
-    <!-- Next Appointment Card -->
-    <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 appointment-card">
-        <div class="bg-blue-500 text-white px-6 py-3">
-            <h3 class="font-semibold flex items-center">
-                <i class="fas fa-calendar-check mr-2"></i> Próxima Consulta
-            </h3>
-        </div>
-        <div class="p-6">
-            <div class="flex items-start">
-                <div class="flex-shrink-0 bg-blue-100 rounded-full p-3">
-                    <i class="fas fa-user-md text-blue-500 text-xl"></i>
-                </div>
-                <div class="ml-4">
-                    <div class="flex items-center">
-                        <h4 class="text-lg font-semibold text-gray-800">Dr. Carlos Mendes</h4>
-                        <span class="status-badge status-agendada ml-3">
-                            <i class="fas fa-clock mr-1"></i> Agendada
-                        </span>
-                    </div>
-                    <p class="text-gray-600 mb-2">Cardiologista</p>
-                    <div class="flex items-center text-gray-500 mb-1">
-                        <i class="far fa-calendar-alt mr-2"></i>
-                        <span>15 de Junho de 2023</span>
-                    </div>
-                    <div class="flex items-center text-gray-500">
-                        <i class="far fa-clock mr-2"></i>
-                        <span>14:30 - 15:00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-end space-x-3 mt-4">
-                <button class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition duration-300">
-                    <i class="fas fa-times mr-2"></i> Cancelar
-                </button>
-                <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300">
-                    <i class="fas fa-calendar-alt mr-2"></i> Remarcar
-                </button>
-            </div>
-        </div>
+  </div>
+
+  <!-- Appointments Table -->
+  <div class="bg-white rounded-xl shadow-md">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+            >
+              Médico
+            </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+            >
+              Especialidade
+            </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+            >
+              Data
+            </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+            >
+              Horário
+            </th>
+            <th
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+            >
+              Status
+            </th>
+            <th
+              class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase"
+            >
+              Ações
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let appt of appointments" class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap flex items-center">
+              <div
+                class="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-user-md text-blue-500"></i>
+              </div>
+              <div class="ml-4 text-sm font-medium text-gray-900">
+                {{ appt.doctorName }}
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {{ appt.specialty }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {{ appt.date | date : "longDate" : "pt-BR" }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {{ appt.time }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span class="status-badge" [ngClass]="'status-' + appt.status">
+                <i
+                  class="mr-1"
+                  [ngClass]="{
+                    'fas fa-clock': appt.status === 'agendada',
+                    'fas fa-check-circle': appt.status === 'concluida',
+                    'fas fa-times-circle': appt.status === 'cancelada'
+                  }"
+                ></i>
+                {{ appt.status | titlecase }}
+              </span>
+            </td>
+            <td
+              class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+            >
+              <!-- ações diversas… -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    
-    
-    <!-- Appointments Table -->
-    <div class="bg-white rounded-xl shadow-md overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Médico</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Especialidade</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horário</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <!-- Appointment 1 -->
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-user-md text-blue-500"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">Dra. Ana Lúcia</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">Dermatologista</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">20 de Junho de 2023</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">10:00 - 10:30</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="status-badge status-agendada">
-                                <i class="fas fa-clock mr-1"></i> Agendada
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium relative">
-                            <button class="text-gray-400 hover:text-gray-600 focus:outline-none dropdown-toggle" onclick="toggleDropdown('dropdown1')">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div id="dropdown1" class="dropdown-menu">
-                                <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2 text-blue-500"></i>Remarcar</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item"><i class="fas fa-times mr-2 text-red-500"></i>Cancelar</a>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Appointment 2 -->
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-user-md text-blue-500"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">Dr. Roberto Alves</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">Ortopedista</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">25 de Junho de 2023</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">16:15 - 16:45</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="status-badge status-agendada">
-                                <i class="fas fa-clock mr-1"></i> Agendada
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium relative">
-                            <button class="text-gray-400 hover:text-gray-600 focus:outline-none dropdown-toggle" onclick="toggleDropdown('dropdown2')">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div id="dropdown2" class="dropdown-menu">
-                                <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2 text-blue-500"></i>Remarcar</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item"><i class="fas fa-times mr-2 text-red-500"></i>Cancelar</a>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Appointment 3 (Completed) -->
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 bg-green-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-user-md text-green-500"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">Dra. Mariana Costa</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">Pediatra</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">5 de Maio de 2023</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">09:00 - 09:30</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="status-badge status-concluida">
-                                <i class="fas fa-check-circle mr-1"></i> Concluída
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium relative">
-                            <button class="text-gray-400 hover:text-gray-600 focus:outline-none dropdown-toggle" onclick="toggleDropdown('dropdown3')">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div id="dropdown3" class="dropdown-menu">
-                                <a href="#" class="dropdown-item"><i class="fas fa-file-medical mr-2 text-green-500"></i>Ver Receita</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2 text-blue-500"></i>Nova Consulta</a>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <!-- Appointment 4 (Canceled) -->
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 bg-red-100 rounded-full flex items-center justify-center">
-                                    <i class="fas fa-user-md text-red-500"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">Dr. Felipe Ramos</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">Neurologista</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">10 de Abril de 2023</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">11:00 - 11:30</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="status-badge status-cancelada">
-                                <i class="fas fa-times-circle mr-1"></i> Cancelada
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium relative">
-                            <button class="text-gray-400 hover:text-gray-600 focus:outline-none dropdown-toggle" onclick="toggleDropdown('dropdown4')">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            <div id="dropdown4" class="dropdown-menu">
-                                <a href="#" class="dropdown-item"><i class="fas fa-calendar-alt mr-2 text-blue-500"></i>Nova Consulta</a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+  </div>
 </div>

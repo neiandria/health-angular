@@ -14,8 +14,8 @@
                             DR
                         </div>
                         <div class="ml-3">
-                            <p class="font-medium">Dr. Carlos Silva</p>
-                            <p class="text-sm text-gray-500">Cardiologista</p>
+                            <p class="font-medium">{{currentUser?.fullName}}</p>
+                            <p class="text-sm text-gray-500">{{currentUser?.specialty}}</p>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         <div class="flex justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Consultas Hoje</p>
-                                <p class="text-3xl font-bold mt-2">8</p>
+                                <p class="text-3xl font-bold mt-2">{{todayCount}}</p>
                             </div>
                             <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center">
                                 <i class="fas fa-calendar-day text-healthPrimary text-xl"></i>
@@ -92,7 +92,7 @@
                         <div class="flex justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Consultas Amanhã</p>
-                                <p class="text-3xl font-bold mt-2">5</p>
+                                <p class="text-3xl font-bold mt-2">{{tomorrowCount}}</p>
                             </div>
                             <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center">
                                 <i class="fas fa-calendar-alt text-healthSecondary text-xl"></i>
@@ -104,7 +104,7 @@
                         <div class="flex justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Esta Semana</p>
-                                <p class="text-3xl font-bold mt-2">24</p>
+                                <p class="text-3xl font-bold mt-2">{{weekCount}}</p>
                             </div>
                             <div class="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center">
                                 <i class="fas fa-calendar-week text-purple-500 text-xl"></i>
@@ -116,7 +116,7 @@
                         <div class="flex justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Total de Pacientes</p>
-                                <p class="text-3xl font-bold mt-2">142</p>
+                                <p class="text-3xl font-bold mt-2">{{totalPatients}}</p>
                             </div>
                             <div class="w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center">
                                 <i class="fas fa-user-friends text-pink-500 text-xl"></i>

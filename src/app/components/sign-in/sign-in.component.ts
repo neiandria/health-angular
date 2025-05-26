@@ -1,35 +1,25 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
+import { UserService } from '../../services/user.service';
+import { FormsModule} from '@angular/forms';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [FormsModule, NgIf],
   templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.css'
+  styleUrl: './sign-in.component.css',
+  imports: [FormsModule, NgIf]
 })
 export class SignInComponent {
-  formData = {
-    fullName: '',
-    email: '',
-    accountType: '',
-    gender: '',
-    phone: '',
-    cpf: '',
-    birthDate: '',
-    crm: '',
-    specialty: '',
-    password: '',
-    confirmPassword: ''
+  formData: any = {
+    accountType: ''
   };
 
+  constructor(private userService: UserService) {}
+
   onSubmit() {
-    if (this.formData.password !== this.formData.confirmPassword) {
-      alert('As senhas não coincidem. Por favor, verifique novamente.');
-      return;
-    }
-    // Aqui você pode fazer o envio para backend futuramente
-    console.log('Formulário enviado', this.formData);
+    this.userService.addUser(this.formData);
+    console.log(this.formData)
+    console.log('Usuário cadastrado com sucesso!');
+    this.formData = { accountType: '' };
   }
 }
