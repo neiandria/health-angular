@@ -1,5 +1,6 @@
 // src/app/services/user.service.ts
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 export interface BaseUser {
   fullName: string;
@@ -20,12 +21,12 @@ export interface Appointment {
   date: Date;
   time: string;
   status: 'agendada' | 'concluida' | 'cancelada';
-  reason?: string; // Motivo da consulta
+  reason?: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private patients: BaseUser[] = [
+   private patients: BaseUser[] = [
     {
       fullName: 'João Silva',
       email: 'joao.silva@example.com',
@@ -77,7 +78,10 @@ export class UserService {
   ];
 
   private appointmentsMap: Record<string, Appointment[]> = {};
-  private currentUser: BaseUser | null = null;
+
+  // Reatividade no usuário atual
+  private currentUserSubject = new BehaviorSubject<BaseUser | null>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
 
   constructor() {
     // Inicializa mapa de consultas para pacientes pré-definidos
@@ -146,12 +150,13 @@ export class UserService {
     return all.find(u => u.email === email && u.password === password);
   }
 
-  setCurrentUser(user: BaseUser) {
-    this.currentUser = user;
+  // Atualiza o currentUser e emite para os inscritos
+  setCurrentUser(user: BaseUser | null) {
+    this.currentUserSubject.next(user);
   }
 
   getCurrentUser(): BaseUser | null {
-    return this.currentUser;
+    return this.currentUserSubject.getValue();
   }
 
   addAppointmentForPatient(email: string, appt: Appointment) {
@@ -165,7 +170,6 @@ export class UserService {
     return this.appointmentsMap[email] || [];
   }
 
-  // Novo: retorna consultas de um médico, agregando paciente e detalhes
   getAppointmentsForDoctor(doctorName: string): Array<{ patient: BaseUser; appt: Appointment }> {
     const result: Array<{ patient: BaseUser; appt: Appointment }> = [];
     for (const patient of this.patients) {

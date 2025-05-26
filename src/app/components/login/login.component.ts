@@ -8,19 +8,19 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [FormsModule]
+  imports: [FormsModule],
 })
 export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(
-    private router: Router,
-    private userService: UserService
-  ) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   onSubmit() {
-    const user = this.userService.getUserByCredentials(this.email, this.password);
+    const user = this.userService.getUserByCredentials(
+      this.email,
+      this.password
+    );
     if (!user) {
       alert('Credenciais inválidas');
       return;

@@ -5,10 +5,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   selector: 'app-feature-card',
   imports: [],
   templateUrl: './feature-card.component.html',
-  styleUrl: './feature-card.component.css'
+  styleUrl: './feature-card.component.css',
 })
 export class FeatureCardComponent {
-  title = input<string>()
-  description = input<string>()
-  iconSvg = input<string>()
+  title = input<string>();
+  description = input<string>();
+  iconSvg = input<string>();
 }

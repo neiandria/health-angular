@@ -4,14 +4,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { UserService, Appointment, BaseUser } from '../../services/user.service';
+import {
+  UserService,
+  Appointment,
+  BaseUser,
+} from '../../services/user.service';
 
 @Component({
   selector: 'app-consultas',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './consultas.component.html',
-  styleUrls: ['./consultas.component.css']
+  styleUrls: ['./consultas.component.css'],
 })
 export class ConsultasComponent implements OnInit, OnDestroy {
   currentUser: BaseUser | null = null;
@@ -22,15 +26,12 @@ export class ConsultasComponent implements OnInit, OnDestroy {
 
   private routerSub!: Subscription;
 
-  constructor(
-    private userService: UserService,
-    private router: Router
-  ) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.routerSub = this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(event => {
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
         const nav = event as NavigationEnd;
         if (nav.urlAfterRedirects === '/consultas') {
           this.loadData();
@@ -55,15 +56,18 @@ export class ConsultasComponent implements OnInit, OnDestroy {
     }
 
     // Carrega e ordena consultas
-    this.appointments = this.userService.getAppointmentsForPatient(this.currentUser.email)
+    this.appointments = this.userService
+      .getAppointmentsForPatient(this.currentUser.email)
       .sort((a, b) => a.date.getTime() - b.date.getTime());
 
     // Calcula próxima consulta futura
     const now = new Date();
     const futureAppointments = this.appointments.filter(
-      appt => appt.date > now && appt.status === 'agendada'
+      (appt) => appt.date > now && appt.status === 'agendada'
     );
-    this.nextAppointment = futureAppointments.length ? futureAppointments[0] : null;
+    this.nextAppointment = futureAppointments.length
+      ? futureAppointments[0]
+      : null;
 
     if (this.nextAppointment) {
       const diffMs = this.nextAppointment.date.getTime() - now.getTime();
