@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Appointment | Doctor Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .step-indicator {
+            position: relative;
+        }
+        .step-indicator:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -2rem;
+            width: 4rem;
+            height: 2px;
+            background-color: #e5e7eb;
+        }
+        .step-indicator.active:not(:last-child):after {
+            background-color: #3b82f6;
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto p-4 md:p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Schedule New Appointment</h1>
+            <div class="flex items-center space-x-2">
+                <span class="text-sm text-gray-500">Dr. Smith</span>
+                <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                    <i class="fas fa-user-md"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="flex justify-between items-center mb-10 relative">
+            <div class="step-indicator flex flex-col items-center active" id="step1-indicator">
+                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white mb-2">
+                    <span>1</span>
+                </div>
+                <span class="text-sm font-medium text-blue-600">Patient</span>
+            </div>
+            <div class="step-indicator flex flex-col items-center" id="step2-indicator">
+                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mb-2">
+                    <span>2</span>
+                </div>
+                <span class="text-sm font-medium text-gray-500">Date & Time</span>
+            </div>
+            <div class="step-indicator flex flex-col items-center" id="step3-indicator">
+                <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mb-2">
+                    <span>3</span>
+                </div>
+                <span class="text-sm font-medium text-gray-500">Confirm</span>
+            </div>
+        </div>
+
+        <!-- Step 1: Select Patient -->
+        <div id="step1" class="bg-white rounded-xl shadow-md p-6 fade-in">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Select Patient</h2>
+            
+            <div class="relative mb-6">
+                <input type="text" id="patient-search" placeholder="Search patients..." 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <i class="fas fa-search absolute right-3 top-3.5 text-gray-400"></i>
+            </div>
+            
+            <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
+                <div class="patient-card flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors" data-patient-id="1">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-4">
+                        <i class="fas fa-user text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-800">John Doe</h3>
+                        <p class="text-sm text-gray-500">ID: P001 | Last visit: 15 Jun 2023</p>
+                    </div>
+                </div>
+                
+                <div class="patient-card flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors" data-patient-id="2">
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4">
+                        <i class="fas fa-user text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Sarah Johnson</h3>
+                        <p class="text-sm text-gray-500">ID: P002 | Last visit: 22 May 2023</p>
+                    </div>
+                </div>
+                
+                <div class="patient-card flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors" data-patient-id="3">
+                    <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-4">
+                        <i class="fas fa-user text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Michael Brown</h3>
+                        <p class="text-sm text-gray-500">ID: P003 | Last visit: 10 Apr 2023</p>
+                    </div>
+                </div>
+                
+                <div class="patient-card flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors" data-patient-id="4">
+                    <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mr-4">
+                        <i class="fas fa-user text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-800">Emily Wilson</h3>
+                        <p class="text-sm text-gray-500">ID: P004 | Last visit: 05 Mar 2023</p>
+                    </div>
+                </div>
+                
+                <div class="patient-card flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors" data-patient-id="5">
+                    <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 mr-4">
+                        <i class="fas fa-user text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-800">David Lee</h3>
+                        <p class="text-sm text-gray-500">ID: P005 | Last visit: 18 Feb 2023</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 flex justify-end">
+                <button id="next-to-step2" class="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    Next <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Select Date & Time -->
+        <div id="step2" class="bg-white rounded-xl shadow-md p-6 hidden fade-in">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Select Date & Time</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-medium text-gray-700 mb-3">Select Date</h3>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <button class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="font-medium">June 2023</span>
+                            <button class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="grid grid-cols-7 gap-2 text-center">
+                            <div class="text-xs text-gray-500 py-1">Sun</div>
+                            <div class="text-xs text-gray-500 py-1">Mon</div>
+                            <div class="text-xs text-gray-500 py-1">Tue</div>
+                            <div class="text-xs text-gray-500 py-1">Wed</div>
+                            <div class="text-xs text-gray-500 py-1">Thu</div>
+                            <div class="text-xs text-gray-500 py-1">Fri</div>
+                            <div class="text-xs text-gray-500 py-1">Sat</div>
+                            
+                            <!-- Calendar days -->
+                            <div class="py-1 text-gray-400">28</div>
+                            <div class="py-1 text-gray-400">29</div>
+                            <div class="py-1 text-gray-400">30</div>
+                            <div class="py-1 text-gray-400">31</div>
+                            <div class="py-1">1</div>
+                            <div class="py-1">2</div>
+                            <div class="py-1">3</div>
+                            
+                            <div class="py-1">4</div>
+                            <div class="py-1">5</div>
+                            <div class="py-1">6</div>
+                            <div class="py-1">7</div>
+                            <div class="py-1">8</div>
+                            <div class="py-1">9</div>
+                            <div class="py-1">10</div>
+                            
+                            <div class="py-1">11</div>
+                            <div class="py-1">12</div>
+                            <div class="py-1">13</div>
+                            <div class="py-1">14</div>
+                            <div class="py-1">15</div>
+                            <div class="py-1">16</div>
+                            <div class="py-1">17</div>
+                            
+                            <div class="py-1">18</div>
+                            <div class="py-1">19</div>
+                            <div class="py-1">20</div>
+                            <div class="py-1">21</div>
+                            <div class="py-1">22</div>
+                            <div class="py-1">23</div>
+                            <div class="py-1">24</div>
+                            
+                            <div class="py-1">25</div>
+                            <div class="py-1 bg-blue-100 text-blue-600 rounded-full font-medium">26</div>
+                            <div class="py-1">27</div>
+                            <div class="py-1">28</div>
+                            <div class="py-1">29</div>
+                            <div class="py-1">30</div>
+                            <div class="py-1 text-gray-400">1</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium text-gray-700 mb-3">Available Time Slots</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button class="time-slot py-2 px-3 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            09:00 AM
+                        </button>
+                        <button class="time-slot py-2 px-3 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            09:30 AM
+                        </button>
+                        <button class="time-slot py-2 px-3 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            10:00 AM
+                        </button>
+                        <button class="time-slot py-2 px-3 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            10:30 AM
+                        </button>
+                        <button class="time-slot py-2 px-3 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            11:00 AM
+                        </button>
+                        <button class="time-slot py-2 px-3 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            11:30 AM
+                        </button>
+                        <button class="time-slot py-2 px-3 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            02:00 PM
+                        </button>
+                        <button class="time-slot py-2 px-3 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                            02:30 PM
+                        </button>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Appointment Type</label>
+                        <select class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option>General Consultation</option>
+                            <option>Follow-up Visit</option>
+                            <option>Annual Checkup</option>
+                            <option>Specialist Consultation</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
+                        <textarea class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="Any special notes..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 flex justify-between">
+                <button id="back-to-step1" class="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i> Back
+                </button>
+                <button id="next-to-step3" class="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    Next <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Confirmation -->
+        <div id="step3" class="bg-white rounded-xl shadow-md p-6 hidden fade-in">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Confirm Appointment</h2>
+            
+            <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-6">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                        <i class="fas fa-info-circle text-blue-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-blue-800">Appointment Summary</h3>
+                        <div class="mt-1 text-sm text-blue-700">
+                            <p>Please review all details before confirming the appointment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="font-medium text-gray-700 mb-3">Patient Information</h3>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-4">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium" id="confirm-patient-name">John Doe</h4>
+                                <p class="text-sm text-gray-500" id="confirm-patient-id">ID: P001</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <p><span class="text-gray-500">Email:</span> <span id="confirm-patient-email">john.doe@example.com</span></p>
+                            <p><span class="text-gray-500">Phone:</span> <span id="confirm-patient-phone">+1 (555) 123-4567</span></p>
+                            <p><span class="text-gray-500">Last Visit:</span> <span id="confirm-patient-last-visit">15 Jun 2023</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium text-gray-700 mb-3">Appointment Details</h3>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="space-y-3">
+                            <div>
+                                <p class="text-sm text-gray-500">Date</p>
+                                <p class="font-medium" id="confirm-appointment-date">Mon, June 26, 2023</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Time</p>
+                                <p class="font-medium" id="confirm-appointment-time">10:00 AM</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Type</p>
+                                <p class="font-medium" id="confirm-appointment-type">General Consultation</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Notes</p>
+                                <p class="font-medium" id="confirm-appointment-notes">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-green-50 border border-green-100 rounded-lg p-4 mb-6 hidden" id="success-message">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-1">
+                        <i class="fas fa-check-circle text-green-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-green-800">Appointment Scheduled Successfully!</h3>
+                        <div class="mt-1 text-sm text-green-700">
+                            <p>The patient has been notified via email with all the appointment details.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 flex justify-between">
+                <button id="back-to-step2" class="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i> Back
+                </button>
+                <button id="confirm-appointment" class="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    Confirm Appointment <i class="fas fa-check ml-2"></i>
+                </button>
+            </div>
+            
+            <div class="mt-6 text-center hidden" id="back-to-dashboard-container">
+                <a href="dashboard.html" class="inline-flex items-center px-6 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors">
+                    <i class="fas fa-home mr-2"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Current step tracking
+        let currentStep = 1;
+        let selectedPatient = null;
+        let selectedDate = 'Mon, June 26, 2023';
+        let selectedTime = null;
+        let selectedType = 'General Consultation';
+        let selectedNotes = '-';
+        
+        // DOM elements
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const nextToStep2 = document.getElementById('next-to-step2');
+        const nextToStep3 = document.getElementById('next-to-step3');
+        const backToStep1 = document.getElementById('back-to-step1');
+        const backToStep2 = document.getElementById('back-to-step2');
+        const confirmAppointmentBtn = document.getElementById('confirm-appointment');
+        const successMessage = document.getElementById('success-message');
+        const backToDashboard = document.getElementById('back-to-dashboard-container');
+        
+        // Patient data (simplified for demo)
+        const patients = {
+            1: { name: 'John Doe', id: 'P001', email: 'john.doe@example.com', phone: '+1 (555) 123-4567', lastVisit: '15 Jun 2023' },
+            2: { name: 'Sarah Johnson', id: 'P002', email: 'sarah.j@example.com', phone: '+1 (555) 987-6543', lastVisit: '22 May 2023' },
+            3: { name: 'Michael Brown', id: 'P003', email: 'michael.b@example.com', phone: '+1 (555) 456-7890', lastVisit: '10 Apr 2023' },
+            4: { name: 'Emily Wilson', id: 'P004', email: 'emily.w@example.com', phone: '+1 (555) 789-0123', lastVisit: '05 Mar 2023' },
+            5: { name: 'David Lee', id: 'P005', email: 'david.lee@example.com', phone: '+1 (555) 234-5678', lastVisit: '18 Feb 2023' }
+        };
+        
+        // Patient selection
+        document.querySelectorAll('.patient-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove active class from all cards
+                document.querySelectorAll('.patient-card').forEach(c => {
+                    c.classList.remove('border-blue-500', 'bg-blue-50');
+                });
+                
+                // Add active class to selected card
+                this.classList.add('border-blue-500', 'bg-blue-50');
+                
+                // Enable next button
+                nextToStep2.disabled = false;
+                
+                // Store selected patient
+                const patientId = this.getAttribute('data-patient-id');
+                selectedPatient = patients[patientId];
+            });
+        });
+        
+        // Time slot selection
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.addEventListener('click', function() {
+                // Remove active class from all slots
+                document.querySelectorAll('.time-slot').forEach(s => {
+                    s.classList.remove('border-blue-500', 'bg-blue-50');
+                });
+                
+                // Add active class to selected slot
+                this.classList.add('border-blue-500', 'bg-blue-50');
+                
+                // Enable next button
+                nextToStep3.disabled = false;
+                
+                // Store selected time
+                selectedTime = this.textContent.trim();
+            });
+        });
+        
+        // Appointment type change
+        document.querySelector('select').addEventListener('change', function() {
+            selectedType = this.value;
+        });
+        
+        // Notes change
+        document.querySelector('textarea').addEventListener('input', function() {
+            selectedNotes = this.value || '-';
+        });
+        
+        // Navigation between steps
+        nextToStep2.addEventListener('click', () => {
+            step1.classList.add('hidden');
+            step2.classList.remove('hidden');
+            updateStepIndicator(2);
+            currentStep = 2;
+        });
+        
+        nextToStep3.addEventListener('click', () => {
+            step2.classList.add('hidden');
+            step3.classList.remove('hidden');
+            updateStepIndicator(3);
+            currentStep = 3;
+            
+            // Update confirmation details
+            document.getElementById('confirm-patient-name').textContent = selectedPatient.name;
+            document.getElementById('confirm-patient-id').textContent = `ID: ${selectedPatient.id}`;
+            document.getElementById('confirm-patient-email').textContent = selectedPatient.email;
+            document.getElementById('confirm-patient-phone').textContent = selectedPatient.phone;
+            document.getElementById('confirm-patient-last-visit').textContent = selectedPatient.lastVisit;
+            
+            document.getElementById('confirm-appointment-date').textContent = selectedDate;
+            document.getElementById('confirm-appointment-time').textContent = selectedTime;
+            document.getElementById('confirm-appointment-type').textContent = selectedType;
+            document.getElementById('confirm-appointment-notes').textContent = selectedNotes;
+        });
+        
+        backToStep1.addEventListener('click', () => {
+            step2.classList.add('hidden');
+            step1.classList.remove('hidden');
+            updateStepIndicator(1);
+            currentStep = 1;
+        });
+        
+        backToStep2.addEventListener('click', () => {
+            step3.classList.add('hidden');
+            step2.classList.remove('hidden');
+            updateStepIndicator(2);
+            currentStep = 2;
+        });
+        
+        // Confirm appointment
+        confirmAppointmentBtn.addEventListener('click', () => {
+            // In a real app, you would send this data to your backend
+            console.log('Appointment confirmed:', {
+                patient: selectedPatient,
+                date: selectedDate,
+                time: selectedTime,
+                type: selectedType,
+                notes: selectedNotes
+            });
+            
+            // Show success message
+            successMessage.classList.remove('hidden');
+            confirmAppointmentBtn.classList.add('hidden');
+            backToStep2.classList.add('hidden');
+            backToDashboard.classList.remove('hidden');
+        });
+        
+        // Update step indicator
+        function updateStepIndicator(step) {
+            // Reset all indicators
+            document.querySelectorAll('.step-indicator').forEach(indicator => {
+                const number = indicator.querySelector('div');
+                const text = indicator.querySelector('span');
+                
+                number.classList.remove('bg-blue-600', 'text-white');
+                number.classList.add('bg-gray-200', 'text-gray-500');
+                
+                text.classList.remove('text-blue-600');
+                text.classList.add('text-gray-500');
+                
+                indicator.classList.remove('active');
+            });
+            
+            // Update current and previous indicators
+            for (let i = 1; i <= step; i++) {
+                const indicator = document.getElementById(`step${i}-indicator`);
+                const number = indicator.querySelector('div');
+                const text = indicator.querySelector('span');
+                
+                if (i === step) {
+                    number.classList.remove('bg-gray-200', 'text-gray-500');
+                    number.classList.add('bg-blue-600', 'text-white');
+                    
+                    text.classList.remove('text-gray-500');
+                    text.classList.add('text-blue-600');
+                } else {
+                    number.classList.remove('bg-gray-200', 'text-gray-500');
+                    number.classList.add('bg-blue-600', 'text-white');
+                    
+                    text.classList.remove('text-gray-500');
+                    text.classList.add('text-blue-600');
+                }
+                
+                indicator.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
